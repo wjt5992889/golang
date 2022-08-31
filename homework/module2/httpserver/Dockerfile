@@ -9,6 +9,8 @@ COPY . .
 RUN go build -o httpserver
 
 FROM alpine:3.15
+RUN apk add --no-cache tini
 COPY --from=build ./build/httpserver /httpserver
 
+ENTRYPOINT ["/sbin/tini", "--"]
 CMD ["/httpserver"]

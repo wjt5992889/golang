@@ -27,6 +27,12 @@ spec:
         image: twu1987/httpserver:latest
         ports:
             - containerPort: 9090
+        env:
+          - name: HOST
+            valueFrom:
+              configMapKeyRef:
+                key: hostname
+                name: cm
         lifecycle:
           preStop:
             exec:
